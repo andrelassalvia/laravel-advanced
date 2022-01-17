@@ -17,4 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// service container
 Route::get('pay', 'PayOrderController@store');
+
+
+// composer view
+Route::get('channels', 'ChannelController@index');
+Route::get('post/create', 'PostController@create');
