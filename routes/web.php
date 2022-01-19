@@ -3,6 +3,10 @@
 use App\PostCardSendingService;
 use Illuminate\Support\Facades\Route;
 use App\Postcard;
+use Illuminate\Support\Str;
+use Illuminate\Routing\ResponseFactory;
+use Illuminate\Http\Response;
+
 
 
 /*
@@ -17,6 +21,10 @@ use App\Postcard;
 */
 
 Route::get('/', function () {
+
+    // dd(Str::partNumber(123456789));
+    // dd(ResponseFactory::errorJson());
+    return ResponseFactory::errorJson();
     return view('welcome');
 });
 

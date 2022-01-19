@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\View;
 use App\Models\Channel;
 use App\Http\Views\Composers\ChannelsComposer;
 use App\PostCardSendingService;
+use Illuminate\Support\Str;
+use App\Mixins\StrMixins;
+use Illuminate\Routing\ResponseFactory;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -53,9 +56,28 @@ class AppServiceProvider extends ServiceProvider
         View::composer('partials.*', ChannelsComposer::class);
 
         // facades
-        $this->app->singleton('Postcard', function($app){
-            return new PostCardSendingService('US', 4, 6);
+        // $this->app->singleton('Postcard', function($app){
+        //     return new PostCardSendingService('US', 4, 6);
+        // });
+
+        // Macros
+
+        // macro unica
+        Str::macro('partNumber', function($part){
+
+            return 'AB-'.Str::substr($part, 0, 3).'-'.Str::substr($part, 3);
+        } );
+
+        ResponseFactory::macro('errorJson', function($message = 'Default error message'){
+            
+            return [
+                'message' => $message,
+                'error_code' => '123'
+            ];
         });
+
+        // classe com varias macros
+        Str::mixin(new StrMixins(), true);
     }
 
 
