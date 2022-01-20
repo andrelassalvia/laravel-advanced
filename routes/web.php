@@ -54,3 +54,10 @@ Route::get('/facades', function(){
 
 // pipelines
 Route::get('/cartas', 'CartaController@index');
+
+
+// Repository Pattern
+Route::get('/customers', 'CustomerController@index');
+Route::get('/customers/{customerId}', 'CustomerController@show');
+Route::get('/customers/{customerId}/update', 'CustomerController@update');
+Route::get('/customers/{customerId}/delete', 'CustomerController@destroy');
