@@ -20,6 +20,7 @@ use Illuminate\Http\Response;
 |
 */
 
+// Macros
 Route::get('/', function () {
 
     // dd(Str::partNumber(123456789));
@@ -49,3 +50,7 @@ Route::get('/facades', function(){
 
     Postcard::hello('Hello from facade', 'abc@123.com');
 });
+
+
+// pipelines
+Route::get('/cartas', 'CartaController@index');
