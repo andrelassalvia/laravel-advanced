@@ -6,6 +6,7 @@ use App\Postcard;
 use Illuminate\Support\Str;
 use Illuminate\Routing\ResponseFactory;
 use Illuminate\Http\Response;
+use App\Models\Carta;
 
 
 
@@ -61,3 +62,98 @@ Route::get('/customers', 'CustomerController@index');
 Route::get('/customers/{customerId}', 'CustomerController@show');
 Route::get('/customers/{customerId}/update', 'CustomerController@update');
 Route::get('/customers/{customerId}/delete', 'CustomerController@destroy');
+
+
+// Lazy Coolection & PHP Generator
+Route::get('/generators', function(){
+
+    function notHappyFunction($number){
+        $return = [];
+
+        for($i=1; $i<$number; $i++){
+            $return[] = $i;
+        };
+
+        return $return;
+    }
+
+    function HappyFunction($number){
+        
+        for($i=1; $i<$number; $i++){
+            yield $i;
+        };
+
+    }
+
+    foreach (HappyFunction(100000000000) as $number){
+        if($number % 1000 == 0){
+            dump('hello');
+        };
+    }
+
+
+
+
+    /*
+    function index($cartas){
+
+       
+        
+        $titles = [];
+        foreach($cartas as $carta){
+            
+            array_push($titles, $carta->title);
+
+        }
+        // dd($titles);
+        foreach($titles as $title){
+            dump('start');
+            yield $title;
+            dump('end');
+        };
+    }
+
+    foreach(index( Carta::all()) as $result){
+        
+        if($result == 'et'){
+           
+            return;
+        }
+        dump($result);
+    }
+    */
+    
+
+     // function happy($string){
+
+    //     yield $string;
+
+    /*
+    function index(){
+
+        $cartas = Carta::allCartas();
+        
+        // dd($cartas);
+        dump(1);
+        yield $cartas; 
+        dump(2);
+
+        dump(3);
+        yield 'two';
+        dump(4);
+    }
+
+    $return =  index();
+    dump($return->current());
+
+    $return->next();
+    dump($return->current());
+
+    $return->next();
+    dump($return->current());
+
+    foreach(index() as $result){
+        dump($result);
+    }
+    */
+});
